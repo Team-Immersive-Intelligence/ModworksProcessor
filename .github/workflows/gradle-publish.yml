@@ -26,7 +26,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '8'
-        distribution: 'coretto'
+        distribution: 'corretto'
         server-id: github
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
