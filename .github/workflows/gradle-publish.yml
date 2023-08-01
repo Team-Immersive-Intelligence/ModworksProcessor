@@ -29,16 +29,12 @@ jobs:
         distribution: 'corretto'
         server-id: github
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: build
-
-    - name: Publish to GitHub Packages
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: publish
+    
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+    
+    - name: Build and Upload Package
+      run: chmod +x gradlew ; ./gradlew build --scan ; ./gradlew publish --scan
       env:
         gpr.user: ${{ github.actor }}
         gpr.token: ${{ secrets.TOKEN }}
