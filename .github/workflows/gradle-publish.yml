@@ -36,5 +36,5 @@ jobs:
     - name: Build and Upload Package
       run: chmod +x gradlew ; ./gradlew build --scan ; ./gradlew publish --scan
       env:
-        gpr.user: ${{ github.actor }}
-        gpr.token: ${{ secrets.TOKEN }}
+        mvn_user: ${{ github.actor }}
+        mvn_token: ${{ secrets.GITHUB_TOKEN }}

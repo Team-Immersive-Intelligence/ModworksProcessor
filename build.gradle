@@ -31,8 +31,8 @@ publishing {
 
             credentials {
 //                username = System.getenv("MAVEN_USERNAME")
-                username = project.findProperty("gpr.user") ?: System.getProperty("gpr.user")
-                password = project.findProperty("gpr.token") ?: System.getProperty("gpr.token")
+                username = project.findProperty("mvn_user") ?: System.getProperty("mvn_user")
+                password = project.findProperty("mvn_token") ?: System.getProperty("mvn_token")
                 println "GitHubPackages build.gradle\n\tusername=$username\n\ttoken=$password"
             }
         }
