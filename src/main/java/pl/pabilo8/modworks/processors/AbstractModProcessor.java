@@ -23,16 +23,22 @@ public abstract class AbstractModProcessor extends AbstractProcessor
 			return false;
 
 		MODID = getOption("modworks.modid");
-		DIR_JAVA = getOption("modworks.javadir");
-		DIR_RESOURCES = getOption("modworks.resourcedir");
+		DIR_JAVA = getOption("modworks.javadir", "java");
+		DIR_RESOURCES = getOption("modworks.resourcedir","resources");
 
 		return doProcessing(annotations, roundEnv);
 	}
 
 	@Nonnull
+	protected final String getOption(String name, String ifAbsent)
+	{
+		return processingEnv.getOptions().getOrDefault(name, ifAbsent);
+	}
+
+	@Nonnull
 	protected final String getOption(String name)
 	{
-		return processingEnv.getOptions().getOrDefault(name, "");
+		return getOption(name, "");
 	}
 
 	protected abstract boolean doProcessing(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv);
