@@ -1,6 +1,7 @@
 package test;
 
 import pl.pabilo8.modworks.annotations.sound.ModSound;
+import pl.pabilo8.modworks.annotations.MCModInfo;
 
 /**
  * @author Pabilo8
@@ -13,9 +14,14 @@ public class HelloWorld
 
 	@ModSound(name = "test3", subtitle = "*")
 	public static int device2;
-
 	public static void main(String[] args)
 	{
 		System.out.println("Hello World!");
+	}
+
+	@MCModInfo()
+	public static class Mod
+	{
+
 	}
 }

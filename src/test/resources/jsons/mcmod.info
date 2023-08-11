@@ -1,0 +1,14 @@
+{
+  "modid": "testmod",
+  "name": "Gradle Test Mod",
+  "description": "Test description",
+  "version": "0.1.0",
+  "mcversion": "1.12.2",
+  "url": "https://example.com",
+  "updateUrl": "",
+  "authorList": ["Pabilo8", "Carver", "Schaeferd", "Bastian", "GabrielV", "Automated Carver Device"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}

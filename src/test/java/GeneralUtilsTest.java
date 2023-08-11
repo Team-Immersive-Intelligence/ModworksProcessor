@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 import pl.pabilo8.modworks.utils.GeneralUtils;
 
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,8 +22,14 @@ class GeneralUtilsTest
 	void writeStream()
 	{
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		assertDoesNotThrow(() -> GeneralUtils.writeStream(stream,"[{('%s %s')}]","hello","world"));
+		assertDoesNotThrow(() -> GeneralUtils.writeStream(stream, "[{('%s %s')}]", "hello", "world"));
 
-		assertEquals(stream.toString(),"[{('hello world')}]");
+		assertEquals(stream.toString(), "[{('hello world')}]");
+	}
+
+	@Test
+	void writeJSON()
+	{
+		//TODO: 11.08.2023 test
 	}
 }
