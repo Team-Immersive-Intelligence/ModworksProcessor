@@ -23,6 +23,7 @@ import java.util.regex.Matcher;
 })
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 @AutoService(Processor.class)
+//TODO: 13.08.2023 rewrite with json
 public class SoundProcessor extends AbstractModProcessor
 {
 	@Override

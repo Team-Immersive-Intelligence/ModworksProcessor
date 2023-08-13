@@ -1,8 +1,6 @@
-import com.google.common.collect.ImmutableList;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.testing.compile.*;
+import com.google.testing.compile.Compilation;
+import com.google.testing.compile.CompilationSubject;
+import com.google.testing.compile.JavaFileObjects;
 import org.junit.After;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,19 +8,14 @@ import pl.pabilo8.modworks.processors.MCModInfoProcessor;
 
 import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
-
 import java.io.IOException;
-import java.lang.Compiler;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.google.common.truth.Truth.assertAbout;
-import static com.google.common.truth.Truth.assertThat;
 import static com.google.testing.compile.Compiler.javac;
 import static com.google.testing.compile.JavaSourceSubjectFactory.javaSource;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 /**
@@ -95,6 +88,6 @@ class McModInfoProcessorTest
 	{
 		return Arrays.stream(text.split("\n"))
 				.map(String::trim).collect(Collectors.joining())
-				.replaceAll(" ","");
+				.replaceAll(" ", "");
 	}
 }
