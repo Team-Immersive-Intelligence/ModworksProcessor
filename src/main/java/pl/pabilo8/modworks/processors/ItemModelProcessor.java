@@ -38,7 +38,7 @@ public class ItemModelProcessor extends AbstractModProcessor
 
 			//Model properties
 			String fileName = itemModel.itemName();
-			String texturePath = itemModel.texturePath().isEmpty()?fileName: itemModel.itemName();
+			String texturePath = itemModel.texturePath().isEmpty()?fileName: itemModel.texturePath();
 
 			if(!enumValues.isEmpty()) //is an enum with multiple models
 				for(Element value : enumValues)
