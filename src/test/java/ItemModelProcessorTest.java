@@ -32,11 +32,22 @@ class ItemModelProcessorTest
 				.withCompilerOptions("-Amodworks.mcmod=true")
 				.processedWith(new ItemModelProcessor())
 				.compilesWithoutError()
+				//Test 1
 				.and()
 				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test_device", "test1.json")
 				.and()
 				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test_device", "test2.json")
 				.and()
-				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test_device", "test3.json");
+				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test_device", "test3.json")
+				//Test 2
+				.and()
+				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test2", "wiurndly_formatted_enum.json")
+				.and()
+				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test2", "proper_entry.json")
+				//Test 3
+				.and()
+				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test3", "wiurndly_formatted_enum.json")
+				.and()
+				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test3", "proper_entry.json");
 	}
 }

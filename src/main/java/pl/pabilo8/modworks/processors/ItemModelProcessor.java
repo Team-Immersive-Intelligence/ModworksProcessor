@@ -14,10 +14,14 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.MirroredTypeException;
 import javax.tools.Diagnostic.Kind;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @SupportedAnnotationTypes({
 		"pl.pabilo8.modworks.annotations.item.GeneratedItemModels",
@@ -34,21 +38,26 @@ public class ItemModelProcessor extends AbstractModProcessor
 		for(Element element : elements)
 		{
 			GeneratedItemModels itemModel = element.getAnnotation(GeneratedItemModels.class);
-			List<Element> enumValues = GeneralUtils.getEnumValues(element);
-
 			//Model properties
 			String fileName = itemModel.itemName();
 			String texturePath = itemModel.texturePath().isEmpty()?fileName: itemModel.texturePath();
 
+			//Based on another enum
+			if(createAnotherEnumItemModel(itemModel, fileName, texturePath))
+				continue;
+
+			//Based on an annotated enum
+			List<Element> enumValues = GeneralUtils.getEnumValues(element);
 			if(!enumValues.isEmpty()) //is an enum with multiple models
 				for(Element value : enumValues)
 				{
+					//SubModel overrides/complements the main settings
 					GeneratedSubItemModel subModel = value.getAnnotation(GeneratedSubItemModel.class);
 					if(itemModel.onlyInAnnotated()&&subModel==null)
 						continue;
 
 					String subName = fileName+"/"+GeneralUtils.simpleNameOf(value);
-					String subTexture = subName;
+					String subTexture = texturePath+"/"+GeneralUtils.simpleNameOf(value);
 
 					if(subModel!=null&&!subModel.customTexturePath().isEmpty())
 						subTexture = subModel.customTexturePath();
@@ -64,11 +73,40 @@ public class ItemModelProcessor extends AbstractModProcessor
 		return !elements.isEmpty();
 	}
 
+	private boolean createAnotherEnumItemModel(GeneratedItemModels itemModel, String fileName, String texturePath)
+	{
+		List<String> valueSet;
+		try
+		{
+			Class<? extends Enum> clazz = itemModel.valueSet();
+			valueSet = Arrays.stream(clazz.getEnumConstants())
+					.map(Enum::name)
+					.map(String::toLowerCase)
+					.collect(Collectors.toList());
+
+		} catch(MirroredTypeException mte)
+		{
+			DeclaredType classTypeMirror = (DeclaredType)mte.getTypeMirror();
+			valueSet = GeneralUtils.getEnumValues(classTypeMirror.asElement())
+					.stream()
+					.map(GeneralUtils::simpleNameOf)
+					.map(String::toLowerCase)
+					.collect(Collectors.toList());
+		}
+
+		for(String value : valueSet)
+			tryWriteModel(fileName+"/"+value, texturePath+"/"+value, itemModel.type());
+
+		return !valueSet.isEmpty();
+	}
+
 	void tryWriteModel(String modelName, String texturePath, ItemModelType type)
 	{
 		try(JsonWriter writer = GeneralUtils.writeJSON(processingEnv, String.format("%s/assets/%s/models/item/%s.json", DIR_RESOURCES, MODID, modelName)))
 		{
 			writer.beginObject();
+
+			//Parent model this one is based on
 			writer.name("parent").value(type.getParentModel());
 
 			//Add textures
