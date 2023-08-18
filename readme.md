@@ -1,4 +1,9 @@
-<p align="center"><img src="art/logos/logofullhq.png" alt="II Logo"></p>   
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Team-Immersive-Intelligence/ModworksProcessor/main/logo_dark.png">
+  <img alt="ModWorks Logo" src="https://raw.githubusercontent.com/Team-Immersive-Intelligence/ModworksProcessor/main/logo.png">
+</picture>
+</p>
 
 [![Join Here](https://img.shields.io/discord/610912351142674434?color=%237289da&label=Discord)](https://discord.gg/teMfm3R)
 [![Jitpack](https://jitpack.io/v/Pabilo8/ImmersiveIntelligence.svg)](https://jitpack.io/#Team-Immersive-Intelligence/ModworksProcessor)
