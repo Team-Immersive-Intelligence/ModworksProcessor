@@ -19,6 +19,38 @@ dependencies {
     implementation 'com.google.testing.compile:compile-testing:0.21.0'
 }
 
+def customGradle = rootProject.file('custom.gradle')
+if (customGradle.exists()) {
+    apply from: customGradle
+}
+
+tasks.register('signJar') {
+    group 'signing'
+
+    outputs.upToDateWhen {false}
+
+    doLast {
+        def signdir  = new File("$buildDir/libs")
+        signdir.mkdirs()
+        ant.signjar(
+                destDir: "${signdir.absolutePath}",
+                jar: "${signdir.absolutePath}/*.jar",
+                alias: project.ksalias ?: System.getenv("SIGN_ALIAS"),
+                storetype: "jks",
+                keystore: project.keystore ?: System.getenv("SIGN_KEYSTORE"),
+                storepass: project.storepass ?: System.getenv("SIGN_STOREPASS"),
+                keypass: project.keypass ?: System.getenv("SIGN_KEYPASS"),
+                verbose: true,
+                preservelastmodified: "true",
+                tsaurl: project.timestamp_url ?: System.getenv("SIGN_TIMESTAMP")
+        )
+    }
+}
+
+tasks.build.finalizedBy() {
+    signJar
+}
+
 test {
     useJUnitPlatform()
 }
@@ -26,15 +58,15 @@ test {
 publishing {
     repositories {
         maven {
-            name = "GitHub"
-            url = "https://maven.pkg.github.com/Team-Immersive-Intelligence/ModworksProcessor"
-
+            name "iiMavenReleases"
             credentials {
-//                username = System.getenv("MAVEN_USERNAME")
-                username = project.findProperty("mvn_user") ?: System.getenv("mvn_user")
-                password = project.findProperty("mvn_token") ?: System.getenv("mvn_token")
-                println "GitHubPackages build.gradle\n\tusername=$username\n\ttoken=$password"
+                username = project.iiMavenReleasesUsername ?: System.getenv("iiMavenReleasesUsername")
+                password = project.iiMavenReleasesPassword ?: System.getenv("iiMavenReleasesPassword")
             }
+            authentication {
+                basic(BasicAuthentication)
+            }
+            url "https://maven.iiteam.net/releases"
         }
     }
     publications {

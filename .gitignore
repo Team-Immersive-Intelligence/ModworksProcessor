@@ -33,3 +33,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+cert/*
+
+custom.gradle
