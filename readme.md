@@ -1,7 +1,7 @@
 <p align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Team-Immersive-Intelligence/ModworksProcessor/main/.github/logo_dark.png">
-  <img alt="ModWorks Logo" src="https://raw.githubusercontent.com/Team-Immersive-Intelligence/ModworksProcessor/main/.github/logo.png">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Team-Immersive-Intelligence/ModworksProcessor/master/.github/logo_dark.png">
+  <img alt="ModWorks Logo" src="https://raw.githubusercontent.com/Team-Immersive-Intelligence/ModworksProcessor/master/.github/logo.png">
 </picture>
 </p>
 
