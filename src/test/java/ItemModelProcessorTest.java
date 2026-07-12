@@ -5,7 +5,7 @@ import pl.pabilo8.modworks.processors.ItemModelProcessor;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 
 import static com.google.common.truth.Truth.assertAbout;
 import static com.google.testing.compile.JavaSourceSubjectFactory.javaSource;
@@ -39,6 +39,14 @@ class ItemModelProcessorTest
 				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test_device", "test2.json")
 				.and()
 				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test_device", "test3.json")
+				.and()
+				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test_device", "test4.json")
+				.withStringContents(Charset.defaultCharset(), "{\n"+
+						"\t\"parent\": \"item/generated\",\n"+
+						"\t\"textures\": {\n"+
+						"\t\t\"layer0\": \"testmod:nucleardevice\"\n"+
+						"\t}\n"+
+						"}")
 				//Test 2
 				.and()
 				.generatesFileNamed(StandardLocation.SOURCE_OUTPUT, "resources/assets/testmod/models/item/test2", "wiurndly_formatted_enum.json")

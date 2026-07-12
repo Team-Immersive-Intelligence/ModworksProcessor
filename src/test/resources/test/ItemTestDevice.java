@@ -17,7 +17,9 @@ public class ItemTestDevice
 		TEST1,
 		@GeneratedSubItemModel(customTexturePath = "nucleardevice")
 		TEST2,
-		TEST3;
+		TEST3,
+		@GeneratedSubItemModel(customTexturePath = "testmod:nucleardevice")
+		TEST4;
 	}
 
 	@GeneratedItemModels(itemName = "test3", texturePath="t_e_s_t")

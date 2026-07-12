@@ -115,7 +115,7 @@ public class ItemModelProcessor extends AbstractModProcessor
 			{
 				case ITEM_SIMPLE:
 				case ITEM_SIMPLE_TOOL:
-					writer.name("layer0").value(String.format("%s:items/%s", MODID, texturePath));
+					writer.name("layer0").value(texturePath.contains(":")?texturePath: String.format("%s:items/%s", MODID, texturePath));
 					break;
 				case ITEM_SIMPLE_AUTOREPLACED:
 					break;
