@@ -10,6 +10,8 @@ on:
 
 jobs:
   run-tests:
+    name: "Run Unit Tests"
+
     permissions:
       statuses: write
       checks: write
