@@ -22,6 +22,7 @@ import java.util.Set;
 })
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 @AutoService(Processor.class)
+@Deprecated
 public class MCModInfoProcessor extends AbstractModProcessor
 {
 	@Override

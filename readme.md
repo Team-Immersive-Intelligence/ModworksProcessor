@@ -17,6 +17,7 @@ In its current state the processor offers:
 - [x] `sounds.json` file generation based on annotated SoundEvent variables
 - [x] `mcmod.info` file generation based on data passed by gradle build script
 - [x] `json` file generation for simple item models
+- [x] Forge 1.12 crafting recipe JSON generation for item classes and subtype enums
 - [ ] `json` file generation for simple blockstates
 
 ### Usage
